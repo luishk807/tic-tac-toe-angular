@@ -1,0 +1,71 @@
+.tictac-pnl{
+	width:500px;
+}
+.tictac-text{
+	font-size:1.3rem;
+	height:50px;
+	width:20px;
+	vertical-align: middle;
+	font-family: Arial;
+}
+.tictac-text:hover{
+	background-color:#dedede;
+}
+.btable{
+	display:table;
+	width:100%;
+}
+.brow{
+	display: table-row;
+	width:100%;
+}
+.bcell-header{
+	display: table-cell;
+	padding:5px;
+	border: 1px solid black;
+	text-align: center;
+}
+.bcell{
+	display: table-cell;
+	border: 1px solid black;
+	text-align: center;
+	cursor: pointer;
+}
+.titac-winner{
+	font-size:1.3rem;
+	color:green;
+	text-align: center;
+	margin:10px 0px;
+}
+.titac-nowinner{
+	font-size:1.3rem;
+	color:red;
+	text-align: center;
+	margin:10px 0px;
+}
+.titac-turn{
+	font-size:1.2rem;
+	color:black;
+	font-weight: bold;
+	font-family: Arial;
+	text-align: center;
+	margin:15px 0px;
+}
+.tictac-btn{
+	text-align: center;
+	margin: 10px 0px;
+}
+.tictac-button{
+	font-size:1.0rem;
+	font-family:Arial;
+	margin:0px 5px;
+	background-color:white;
+	color:black;
+	border:1px solid black;
+	padding:8px 20px;
+	cursor: pointer;
+}
+.tictac-button:hover{
+	background-color:black;
+	color:white;
+}

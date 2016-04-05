@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.2.28/angular-route.min.js"></script>
+	<title>Document</title>
+	<link rel="stylesheet" href="css/tictactoe.css">
+	<script src="js/tictactoe.js"></script>
+</head>
+<body>
+	<div class="tictac-pnl" ng-app="tictacApp">
+		<div ng-controller="tictacCtrl">
+			<div class="btable titacScore">
+				<div class="brow">
+					<div class="bcell-header" ng-repeat="player in cPlayers track by $index">
+						{{player.name}}
+						<hr/>
+						{{player.score}}
+					</div>
+				</div>
+			</div>
+			<div class="titac-turn">It's "{{cPlayer.name}}" Turn</div>
+			<div class="btable">
+				<div class="brow" ng-repeat="row in tictac track by $index">
+					<div ng-repeat="col in row track by $index" class="bcell tictac-text" ng-click="setSpot($parent.$index,$index)"><div>{{col}}</div></div>
+				</div>
+			</div>
+			<div ng-if="Winner.name && isOver" class="titac-winner">Yay!, {{Winner.name}} Wins</div>
+			<div ng-if="!Winner.name && isOver" class="titac-nowinner">OH NO! No Winner :-(</div>
+			<div class="tictac-btn" ng-if="isOver">
+				<button class="tictac-button" ng-click="resetGame()">AGAIN?</button>
+				<button class="tictac-button" ng-click="resetGameAll()">RESTART?</button>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
