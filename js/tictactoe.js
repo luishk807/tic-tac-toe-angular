@@ -1,3 +1,12 @@
+/**
+ * Tic Tac Toe
+ * Tic Tac Toe Game in Angular
+ * https://github.com/luishk807
+ * 
+ * 
+ * Released on: April 5, 2016
+ */
+
 angular.module("tictacApp",[])
 .controller("tictacCtrl",['$scope','$timeout',function($scope,$timeout){
 	$scope.resetGameAll=function(){
