@@ -23,8 +23,8 @@
 			</div>
 			<div class="titac-turn">It's "{{cPlayer.name}}" Turn</div>
 			<div class="btable">
-				<div class="brow" ng-repeat="row in tictac track by $index">
-					<div ng-repeat="col in row track by $index" class="bcell tictac-text" ng-click="setSpot($parent.$index,$index)"><div>{{col}}</div></div>
+				<div class="brow" ng-repeat="row in tictac track by $index" readonly>
+					<div ng-repeat="col in row track by $index" class="bcell tictac-text" ng-class="{'tictac-disable':!humanTurn}" ng-click="setSpot($parent.$index,$index)"><div>{{col}}</div></div>
 				</div>
 			</div>
 			<div ng-if="Winner.name && isOver" class="titac-winner">Yay!, {{Winner.name}} Wins</div>

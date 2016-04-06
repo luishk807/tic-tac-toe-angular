@@ -19,6 +19,9 @@
 	display: table-row;
 	width:100%;
 }
+.tictac-disable{
+	pointer-events: none;
+}
 .bcell-header{
 	display: table-cell;
 	padding:5px;

@@ -29,6 +29,7 @@ angular.module("tictacApp",[])
 			"1":[null,null,null],
 			"2":[null,null,null]
 		}
+		$scope.humanTurn=true;
 		$scope.cMark="x";
 		$scope.Winner=null;
 		$scope.isOver=false;
@@ -58,7 +59,7 @@ angular.module("tictacApp",[])
 		if((tictac[0][0]==mark && tictac[0][1]==mark && tictac[0][2]==mark) || (tictac[1][0]==mark && tictac[1][1]==mark && tictac[1][2]==mark) || (tictac[2][0]==mark && tictac[2][1]==mark && tictac[2][2]==mark)){
 			found=true;
 		}
-		else if((tictac[0][0]==mark && tictac[1][0]==mark && tictac[2][0]==mark)|| (tictac[0][1]==mark && tictac[1][1]==mark && tictac[2][1]==mark) || (tictac[0][3]==mark && tictac[1][3]==mark && tictac[2][3]==mark)){
+		else if((tictac[0][0]==mark && tictac[1][0]==mark && tictac[2][0]==mark)|| (tictac[0][1]==mark && tictac[1][1]==mark && tictac[2][1]==mark) || (tictac[0][2]==mark && tictac[1][2]==mark && tictac[2][2]==mark)){
 			found=true;
 		}
 		else if((tictac[0][0]==mark && tictac[1][1]==mark && tictac[2][2]==mark) || (tictac[0][2]==mark && tictac[1][1]==mark && tictac[2][0]==mark)){
@@ -80,6 +81,7 @@ angular.module("tictacApp",[])
 		$scope.cPlayer=$scope.cPlayers.filter(function(player){
 			return player.spot != $scope.cMark;
 		})[0]
+		$scope.humanTurn=($scope.cPlayer.name=="Computer")?false:true;
 		$scope.cMark=($scope.cMark=="x")?"o":"x";
 	}
 	$scope.setSpot=function(row,col){
