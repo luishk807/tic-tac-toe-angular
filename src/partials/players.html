@@ -1,0 +1,27 @@
+<div>
+	<div class="btable">
+		<div class="tictac-title">Type Players Name</div>
+		<form novalidate name="tictacPlayerForm">
+			<div class="brow">
+				<div class="bcell-nb">
+					<div class="tictac-player-title">Player 1</div>
+					<div class="tictac-error" ng-show="tictacPlayerForm.player1.$error.required">Please type player 1 name</div>
+					<input autocomplete="off" required type="text" class="tictac-input"/ ng-model="player1" name="player1">
+				</div>
+			</div>
+			<div class="brow">
+				<div class="bcell-nb">
+					<div class="tictac-player-title">Player 2</div>
+					<div class="tictac-error" ng-show="tictacPlayerForm.player2.$error.required">Please type player 2 name</div>
+					<input autocomplete="off" required type="text" class="tictac-input"/ ng-model="player2" name="player2">
+				</div>
+			</div>
+			<div class="brow">
+				<div class="bcell-nb">
+					<button ng-click="setPlayers()">Set Values</button>
+				</div>
+			</div>
+		</form>
+		<div>
+	</div>
+</div>

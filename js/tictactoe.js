@@ -7,8 +7,53 @@
  * Released on: April 5, 2016
  */
 
-angular.module("tictacApp",[])
-.controller("tictacCtrl",['$scope','$timeout',function($scope,$timeout){
+angular.module("tictacApp",['ngRoute'])
+.factory('tictacService',function(){
+	var players={};
+	return{
+		setPlayers:function(data){
+			players=data
+		},
+		getPlayers:function(){
+			return players;
+		}
+	}
+})
+.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
+	$routeProvider
+	.when('/',{
+		templateUrl:'src/partials/main.html'
+	})
+	.when('/player',{
+		templateUrl:'src/partials/player.html'
+	})
+	.when('/players',{
+		templateUrl:'src/partials/players.html',
+		controller:'tictacPlayersCtrl'
+	})
+	.otherwise({
+		templateUrl:'src/partials/main.html'
+	})
+	$locationProvider.html5Mode({
+	  enabled: true,
+	  requireBase: false
+	});
+}])
+.controller('tictacPlayersCtrl',['$scope','tictacService','$location',function($scope,tictacService,$location){
+ 	$scope.setPlayers=function(){
+ 		var players={
+ 			player1:$scope.player1,
+ 			player2:$scope.player2
+ 		};
+ 		console.log("EEE")
+ 		tictacService.setPlayers(players);
+ 		console.log(tictacService.getPlayers());
+ 		// window.location.href="/";
+ 	}
+}])
+.controller("tictacCtrl",['$scope','$timeout','tictacService',function($scope,$timeout,tictacService){
+	var vplayers=tictacService.getPlayers();
+	console.log(vplayers);
 	$scope.resetGameAll=function(){
 		$scope.cPlayers=[
 			{
@@ -95,6 +140,7 @@ angular.module("tictacApp",[])
 				$scope.tictac[row][col]=$scope.cMark;
 				$scope.checkGame();
 				$scope.switchPlayer();
+				/***SCRIPT FOR COMPUTER MOVE **/
 				stillOn=$scope.foundEmpty();
 				if(!$scope.isOver){
 					found=false;
@@ -116,6 +162,7 @@ angular.module("tictacApp",[])
 				{
 					console.log("GAME OVER")
 				}
+				/***END SCRIPT FOR COMPUTER MOVE**/
 			}
 			else{
 				console.log("it's taken")

@@ -34,6 +34,12 @@
 	text-align: center;
 	cursor: pointer;
 }
+.bcell-nb{
+	display: table-cell;
+	text-align: center;
+	cursor: pointer;
+	padding:5px 0px;
+}
 .titac-winner{
 	font-size:1.3rem;
 	color:green;
@@ -46,7 +52,19 @@
 	text-align: center;
 	margin:10px 0px;
 }
-.titac-turn{
+.tictac-player-title{
+	font-size:1.1rem;
+	color:black;
+	text-align: center;
+	margin:10px 0px;
+}
+.tictac-error{
+	font-size:1rem;
+	color:red;
+	text-align: center;
+}
+.titac-turn,
+.tictac-title{
 	font-size:1.2rem;
 	color:black;
 	font-weight: bold;
