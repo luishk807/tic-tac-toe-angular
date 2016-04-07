@@ -7,8 +7,8 @@
  * Released on: April 5, 2016
  */
 
-angular.module("tictacApp",['ngRoute'])
-.factory('tictacService',function(){
+angular.module("tictacApp",['ngRoute','ngMessages'])
+.factory('tictacService',['$location',function($location){
 	var players={};
 	return{
 		setPlayers:function(data){
@@ -16,44 +16,61 @@ angular.module("tictacApp",['ngRoute'])
 		},
 		getPlayers:function(){
 			return players;
+		},
+		redirect:function(path){
+			$location.path(path)
 		}
 	}
-})
+}])
 .config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
 	$routeProvider
 	.when('/',{
-		templateUrl:'src/partials/main.html'
+		templateUrl:'src/partials/player.html',
+		controller:'tictacPlayerCtrl'
 	})
-	.when('/player',{
-		templateUrl:'src/partials/player.html'
+	.when('/game',{
+		templateUrl:'src/partials/main.html'
 	})
 	.when('/players',{
 		templateUrl:'src/partials/players.html',
 		controller:'tictacPlayersCtrl'
 	})
 	.otherwise({
-		templateUrl:'src/partials/main.html'
+		templateUrl:'src/partials/player.html'
 	})
-	$locationProvider.html5Mode({
-	  enabled: true,
-	  requireBase: false
-	});
 }])
-.controller('tictacPlayersCtrl',['$scope','tictacService','$location',function($scope,tictacService,$location){
+.controller('tictacPlayerCtrl',['$scope','tictacService',function($scope,tictacService){
+ 	$scope.redirect=function(path){
+ 		tictacService.redirect(path)
+ 	}
+}])
+.controller('tictacPlayersCtrl',['$scope','tictacService',function($scope,tictacService){
+	$scope.isSubmit=false;
  	$scope.setPlayers=function(){
+ 		$scope.isSubmit=true;
  		var players={
  			player1:$scope.player1,
  			player2:$scope.player2
  		};
- 		console.log("EEE")
  		tictacService.setPlayers(players);
- 		console.log(tictacService.getPlayers());
- 		// window.location.href="/";
+ 		if(!$scope.tictacPlayerForm.$valid)
+ 		{
+ 			$scope.isSubmit=true;
+ 		}
+ 		else
+ 		{
+ 			$location.path('/game');
+ 		}
+ 	}
+ 	$scope.redirect=function(path){
+ 		tictacService.redirect(path)
  	}
 }])
 .controller("tictacCtrl",['$scope','$timeout','tictacService',function($scope,$timeout,tictacService){
 	var vplayers=tictacService.getPlayers();
-	console.log(vplayers);
+	$scope.redirect=function(path){
+ 		tictacService.redirect(path)
+ 	}
 	$scope.resetGameAll=function(){
 		$scope.cPlayers=[
 			{
@@ -66,6 +83,10 @@ angular.module("tictacApp",['ngRoute'])
 				score:0
 			}
 		];
+		if(vplayers.player1 && vplayers.player2){
+			$scope.cPlayers[0].name=vplayers.player1;
+			$scope.cPlayers[1].name=vplayers.player2;
+		}
 		$scope.resetGame();
 	}
 	$scope.resetGame=function(){

@@ -1,4 +1,11 @@
 <div ng-controller="tictacCtrl">
+	<div class="btable">
+		<div class="brow">
+			<div class="bcell-nb" ng-click="redirect('/')">&#8592; Back To Main Menu</div>
+			<div class="bcell-nb" ng-click="redirect('/players')">Change Player Name &#8594;</div>
+		</div>
+	</div>
+	<br/>
 	<div class="btable titacScore">
 		<div class="brow">
 			<div class="bcell-header" ng-repeat="player in cPlayers track by $index">

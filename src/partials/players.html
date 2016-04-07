@@ -1,27 +1,41 @@
 <div>
 	<div class="btable">
-		<div class="tictac-title">Type Players Name</div>
+		<div class="brow">
+			<div class="bcell-nb" ng-click="redirect('/')">&#8592; Back To Main Menu</div>
+		</div>
+	</div>
+	<div class="tictac-title">Type Players Name</div>
 		<form novalidate name="tictacPlayerForm">
-			<div class="brow">
-				<div class="bcell-nb">
-					<div class="tictac-player-title">Player 1</div>
-					<div class="tictac-error" ng-show="tictacPlayerForm.player1.$error.required">Please type player 1 name</div>
-					<input autocomplete="off" required type="text" class="tictac-input"/ ng-model="player1" name="player1">
+			<div class="btable">
+				<div class="brow">
+					<div class="bcell-nb">
+						<div class="tictac-player-title">Player 1</div>
+						<input placeholder="Type Player 1 Name" required type="text" class="tictac-input" ng-model="player1" name="player1"/>
+					</div>
 				</div>
-			</div>
-			<div class="brow">
-				<div class="bcell-nb">
-					<div class="tictac-player-title">Player 2</div>
-					<div class="tictac-error" ng-show="tictacPlayerForm.player2.$error.required">Please type player 2 name</div>
-					<input autocomplete="off" required type="text" class="tictac-input"/ ng-model="player2" name="player2">
+				<div class="brow">
+					<div class="bcell-nb">
+						<div class="tictac-player-title">Player 2</div>
+						<input autocomplete="off" placeholder="Type Player 2 Name" required type="text" class="tictac-input" ng-model="player2" name="player2">
+					</div>
 				</div>
-			</div>
-			<div class="brow">
-				<div class="bcell-nb">
-					<button ng-click="setPlayers()">Set Values</button>
+				<div class="brow" ng-show="isSubmit">
+					<div class="bcell-nb">
+						<ng-messages class="tictac-error" for="tictacPlayerForm.player1.$error" ng-show="tictacPlayerForm.player1.$touched || isSubmit">
+							<ng-message when="required">Please type player 1 name</ng-message>
+						</ng-messages>
+						<br/>
+						<ng-messages class="tictac-error"  for="tictacPlayerForm.player2.$error" ng-show="tictacPlayerForm.player2.$touched || isSubmit">
+							<ng-message when="required">Please type player 2 name</ng-message>
+						</ng-messages>
+					</div>
 				</div>
-			</div>
+				<div class="brow">
+					<div class="bcell-nb">
+						<button class="tictac-button" ng-click="setPlayers()">Set Names</button>
+					</div>
+				</div>
+			<div>
 		</form>
-		<div>
 	</div>
 </div>
