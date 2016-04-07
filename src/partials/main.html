@@ -2,7 +2,8 @@
 	<div class="btable">
 		<div class="brow">
 			<div class="bcell-nb" ng-click="redirect('/')">&#8592; Back To Main Menu</div>
-			<div class="bcell-nb" ng-click="redirect('/players')">Add Second Player &#8594;</div>
+			<div class="bcell-nb" ng-click="redirect('/players')" ng-if="cPlayers[1].name=='Computer'">Add Second Player &#8594;</div>
+			<div class="bcell-nb" ng-click="playComputer()" ng-if="cPlayers[1].name !='Computer'">Switch to Computer &#8594;</div>
 		</div>
 	</div>
 	<br/>

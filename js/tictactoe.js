@@ -11,6 +11,9 @@ angular.module("tictacApp",['ngRoute','ngMessages'])
 .factory('tictacService',['$location',function($location){
 	var players={};
 	return{
+		resetPlayers:function(){
+			players={};
+		},
 		setPlayers:function(data){
 			players=data
 		},
@@ -66,7 +69,7 @@ angular.module("tictacApp",['ngRoute','ngMessages'])
  		tictacService.redirect(path)
  	}
 }])
-.controller("tictacCtrl",['$scope','$timeout','tictacService',function($scope,$timeout,tictacService){
+.controller("tictacCtrl",['$location','$window','$scope','$timeout','tictacService',function($location,$window,$scope,$timeout,tictacService){
 	var vplayers=tictacService.getPlayers();
 	$scope.redirect=function(path){
  		tictacService.redirect(path)
@@ -106,6 +109,11 @@ angular.module("tictacApp",['ngRoute','ngMessages'])
 		$scope.isOver=false;
 		$scope.cPlayer=$scope.cPlayers[0];
 	}
+
+	$scope.playComputer=function(){
+		tictacService.resetPlayers();
+		($location.$$url=="/game")?$window.location.reload():tictacService.redirect('/game');
+ 	}
 	$scope.resetGameAll();
 	$scope.foundEmpty=function(){
 		var found=false;
