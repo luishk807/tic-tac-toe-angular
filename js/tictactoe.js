@@ -59,7 +59,7 @@ angular.module("tictacApp",['ngRoute','ngMessages'])
  		}
  		else
  		{
- 			$location.path('/game');
+ 			tictacService.redirect('/game')
  		}
  	}
  	$scope.redirect=function(path){
@@ -86,6 +86,11 @@ angular.module("tictacApp",['ngRoute','ngMessages'])
 		if(vplayers.player1 && vplayers.player2){
 			$scope.cPlayers[0].name=vplayers.player1;
 			$scope.cPlayers[1].name=vplayers.player2;
+			$scope.playHuman=true;
+		}
+		else
+		{
+			$scope.playHuman=false;
 		}
 		$scope.resetGame();
 	}
@@ -161,37 +166,29 @@ angular.module("tictacApp",['ngRoute','ngMessages'])
 				$scope.tictac[row][col]=$scope.cMark;
 				$scope.checkGame();
 				$scope.switchPlayer();
-				/***SCRIPT FOR COMPUTER MOVE **/
 				stillOn=$scope.foundEmpty();
-				if(!$scope.isOver){
-					found=false;
-					$timeout(function(){
-						while(!found){
-							var prow=Math.floor(Math.random()*3);
-							var pcol=Math.floor(Math.random()*3);
-							if(!$scope.tictac[prow][pcol] && stillOn)
-							{
-								$scope.tictac[prow][pcol]=$scope.cMark;
-								$scope.checkGame();
-								$scope.switchPlayer();
-								found=true;
-							}
-						}
-					},1000)
-				}
-				else
+				/***SCRIPT FOR COMPUTER MOVE **/
+				if(!$scope.playHuman)
 				{
-					console.log("GAME OVER")
+					if(!$scope.isOver){
+						found=false;
+						$timeout(function(){
+							while(!found){
+								var prow=Math.floor(Math.random()*3);
+								var pcol=Math.floor(Math.random()*3);
+								if(!$scope.tictac[prow][pcol] && stillOn)
+								{
+									$scope.tictac[prow][pcol]=$scope.cMark;
+									$scope.checkGame();
+									$scope.switchPlayer();
+									found=true;
+								}
+							}
+						},1000)
+					}
 				}
 				/***END SCRIPT FOR COMPUTER MOVE**/
 			}
-			else{
-				console.log("it's taken")
-			}
-		}
-		else
-		{
-			console.log("GAME OVER")
 		}
 		if($scope.Winner  && $scope.isOver){
 			console.log("FOUND WINNER"+$scope.Winner.name)
